@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Speech Recognition</title>
+    </head>
+    <body>
+        
+        <button id="start" onclick="startRecognition()">Start Recording</button>
+        <button id="end" onclick="stopRecognition()">End Recording</button>
+        <!-- in output id the speech is getting stored as text -->
+        <p id="output"></p>
+        <script>
+            const output = document.getElementById("output");
+            let recognition;
+
+            function startRecognition() {
+                console.log("Inside Recognition");
+                // this statement is for cross browser compatibility to start web speech api method as first one is older version and the second one is new version
+                recognition =
+                    new webkitSpeechRecognition() || new SpeechRecognition();
+                    // this is the language in which the speech will be recognized
+                recognition.lang = "en-US";
+                // this is for continuous recognition of speech that is it will keep on recognizing the speech even if we stop speaking
+                recognition.continuous = true;
+                // this is for interim results that is it will keep on showing the results as we speak
+                recognition.onresult = function (event) {
+                    const transcript =
+                        event.results[event.results.length - 1][0].transcript;
+                    output.textContent += transcript;
+                };
+                // this is for restarting the recognition if it ends as when we stop speaking the recognition stops so to start it again we have to restart it
+                recognition.onend = function () {
+                    recognition.start();
+                };
+                // in this statement the recognition is started
+                recognition.start();
+            }
+            function stopRecognition() {
+                // this statement is for stopping the recognition
+                recognition.stop();
+                // this statement is for clearing the output
+                output.innerHTML = "";
+            }
+        </script>
+    </body>
+</html>

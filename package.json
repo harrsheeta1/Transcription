@@ -1,0 +1,17 @@
+{
+    "name": "game",
+    "version": "1.0.0",
+    "description": "SpeechRecognition is a Node.js project utilizing Puppeteer for automated web speech recognition. This script launches a headless browser instance, loads an HTML file containing a speech recognition interface, and continuously listens for speech input from the user.",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": " node index.js",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "puppeteer": "^22.15.0"
+    },
+    "keywords": []
+}
